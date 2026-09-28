@@ -1,6 +1,6 @@
 # Weekly Learning Log
 
-* **Student Name:**
+* **:**
 * **Week Number:**
 * **Today's Date**
 * **Topic(s):**
@@ -14,14 +14,14 @@ _Empty brackets (``[ ]``) work as checkboxes. You should type an X inside empty 
 
 
 ## What I Worked On This Week
-
+Worksheet 3: Loops, Conditionals and Functions
 **Assignment(s):**
-- [ ] Coding Worksheet
+- [x ] Coding Worksheet
 - [ ] Other
 
 If you marked Coding Worksheet, what is the worksheet number? 
 
->
+> Worksheet 3: Loops, Conditionals and Functions
 
 If you marked Other, describe the work you've done this week.
 
@@ -39,18 +39,18 @@ _If you had no issues or challenges, mark the checkbox below and delete the Chal
 ### Challenge 1:
 
 **Brief Descriptive Title:**
->
+> I struggled with trying to print out my statements to my conditions and also with the problem towards the end.
 
 **Describe the task or problem:**
->
+> I was creating the presidents listr but I was not able to print out my solution or output I got confused and trieds to ask for help on stackoverflow
+at first then went to gemini to help explain the difference between the two.
 
 **Describe the error, confusion, or obstacle you encoutered:**
->
-
+> I was confused on the meanings by these two and why they were so different.
 **Describe your attempts to problem-solve the issue:**
 Attempts:
-1. > 
-2. >
+1. > 3
+2. > The last one i was on it for a while I did not finish mentally I could not.
 3. >
 
 **Which resources did you consult?:**
@@ -58,17 +58,17 @@ Attempts:
 _Replace the placeholder text in brackets ``[   ]`` for specific details of your case._
 
 - [ ] Documentation for [package-or-function]
-- [ ] Stack Overflow: [describe-what-you-searched-for]
+- [] Stack Overflow: [describe-what-you-searched-for]
 - [ ] Course materials: [which-ones]
 - [ ] Class discussion
 - [ ] Office hours
 - [ ] Other: [describe]
 
 **Did you figure out a solution?**
->
+> Yes 
 
 **What did you learn from this challenge?**
->
+>  I learned taht print is for the output and paste is for combining!
 
 
 ### Challenge 2:
