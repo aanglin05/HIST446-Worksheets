@@ -108,3 +108,6 @@ bellevue %>%
   geom_col()
 
 # (f) Choose one of the above visualizations to save to your new output/exercise2/ directory. Commit, then push to GitHub.
+
+dir.create("output/excercise2/", showWarnings = "False")
+ggsave("output/exercise2/.png", width = 8, height = 5)
