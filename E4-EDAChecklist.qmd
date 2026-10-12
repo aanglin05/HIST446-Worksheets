@@ -1,8 +1,8 @@
 ---
 title: "In-Class Exercise 4: An Exploratory Data Analysis Checklist"
 subtitle: "Roger Peng's checklist, applied to Freedom on the Move"
-author: ""
-date: ""
+author: "Asante Anglin"
+date: "10-07-26"
 format:
   html:
     theme: cosmo
@@ -67,7 +67,7 @@ FOTM can't answer that directly: it holds *advertisements*, not escapes.
 
 (@) Write your own sharp question about FOTM's advertisements: one that names exactly what you'd count or measure, and for what unit (an ad, a newspaper, a state, a decade...).
 
->
+> You can filter out the number of escapes and ages. Also filter out the account of articles that held the amount of people that was on the move.
 
 Save your question for a possible future investigation. For the purpose of learning Peng's checklist, we'll pursue a question this database can actually answer:
 
@@ -120,36 +120,34 @@ n_distinct(newspapers$name)   # how many different newspaper titles?
 Titles aren't the whole story: two papers can share a name, and one paper can move. So count the different newspapers by title **and** place of publication:
 
 ```{r}
-ads_place %>%
-  distinct(newspaper, city, state) %>%
-  nrow()                               
+test <- ads_place %>%
+  distinct(newspaper, city, state) 
 ```
 
 (@) What did the `distinct()` function do in the chunk above?
 Hint: take a peak at the documentation for the function with `?distinct`.
 
->
+> What distinct did was hone in into the dataset and filter out the duplicated variables allowing you to keep unique rows. The ID was unique so it separated into two different parts.
 
 (@) The `newspaper` table has 41,551 rows, but notice many different newspapers (unique pair of title + place) there are. So what is the **unit of analysis** in the `newspaper` table? In other words, what is one row? 
 
->
+>  The unit analysis is the newspaper ID which allows to call for one full row of characteristics.
 
 (@) Then find a title that appears in two places: did the paper move, are these two different papers, or is it an error? 
-
-::: {.callout-tip}
 ## Tip:
 To answer the question, you need two things for each title: **where** it was published, and **when**. Build your chunk in three steps:
 
 1. **One row per title and place, with the evidence.** Start from `ads_place`, group by title and place, and summarize how many ads each one has and when they were published:
 
 ```r
-   ads_place %>%
-     group_by(______) %>%
+   ads_place_count <-ads_place %>%
+     group_by(newspaper,city,state) %>%
      summarize(ads   = n(),
-               first = min(________),
-               last  = max(________),
+               first = min(publication_date),
+               last  = max(publication_date),
                .groups = "drop")
 ```
+
 2. **Count places per title.** Pipe that into `add_count(_______)` so that each row shows how many places its title appears in.
 
 3. **Keep only titles with more than one place:** `filter(___ > ___)`.
@@ -163,11 +161,34 @@ To answer the question, you need two things for each title: **where** it was pub
 
 
 ```{r}
+     ads_place_count <-ads_place %>%
+     group_by(newspaper,city,state) %>%
+     summarize(ads   = n(),
+               first = min(publication_date),
+               last  = max(publication_date),
+               .groups = "drop"),
+
+```
+
+```{r}
+  ads_place_count <-ads_place %>%
+     add_count(newspaper) %>%
+     summarize(ads   = n())
+```
+
+
+```{r}
+  add_place_count <-add_count %>%
+     group_by(newspaper) %>%
+     summarize(ads   = n(),
+               first = min(publication_date),
+               last  = max(publication_date),
+               .groups = "drop")
 
 ```
 Write your findings here:
 
-> 
+>  What I found is that the keep shifting 
 
 ------------------------------------------------------------------------
 
@@ -211,7 +232,7 @@ ads_place %>%
 
 (@) Discuss with your pair or group: what are the earliest and latest dates? Which one surprises you, and why?
 
->
+> 
 
 ------------------------------------------------------------------------
 

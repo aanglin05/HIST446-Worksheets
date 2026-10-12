@@ -1,8 +1,8 @@
 ---
 title: "In-Class Exercise: Building a Database of Muncie Directories"
 subtitle: "From a printed source, to a table, to related tables"
-author: ""
-date: ""
+author: "Asante Anglin"
+date: "`10-11-26"
 format:
   html:
     df-print: paged
@@ -60,19 +60,19 @@ Now look at the **scan** of the same page available online by clicking on this U
 
 (@) Compare the scan with the text above. Name **three** things a reader of the scan knows that the OCR text gets wrong or loses.
 
->
+> The scan shows specific directory entries. The document shows formatting and the different column structures, but the ocr output scrambles them, omits them, or translates them into random punctuation marks.
 
 (@) Find the page in this city directory volume that explains the directory's abbreviations (the table of contents on Page 7 tells you where). What does an asterisk before a name mean?
 
->
+> The means an asterisk placed before a name indicates a African American resident.
 
 ### Where did the sample table you loaded with `read_csv()` come from?
 
 The file in `data/` was made by asking the repository for each page's text, one page at a time. You can ask for page 206 yourself. Its address is an ordinary URL, built from the collection's name (`MunCityDirs`) and the page's pointer (`10723`):
 
 ```{r}
-page_url <- "https://dmr.bsu.edu/digital/bl/dmwebservices/index.php?q=dmGetItemInfo/MunCityDirs/10723/json"
 
+page_url <- "https://dmr.bsu.edu/digital/bl/dmwebservices/index.php?q=dmGetItemInfo/MunCityDirs/10723/json"
 live <- tryCatch(jsonlite::fromJSON(page_url), error = function(e) NULL) # send thr request to DMR
 
 if (is.null(live)) {
@@ -83,14 +83,14 @@ if (is.null(live)) {
 ```
 
 (@) Notice the object that was fetched from the JSON request `live`. It's a list 66 elements. Go back to the scan of Page 206 at the DMR website. Can you figure out what those 66 elements refer to?
-
->
+ 
+>This refers to the metadata.  
 
 The repository answered with a whole record for this one page. In a future worksheet, you'll write a loop that does this for many pages, politely. By the end of this code, we saved just one field, `full`, as `live_text`. 
 
 (@) Which three of the 66 fields became the three columns in `pages`?
 
->
+>  The three were the title, record and the full text
 
 (@) Run the code chunk below to create a one-row table from the `live` object that has the same columns as the `pages` table and the values for page 206.
 ```{r}
@@ -107,7 +107,7 @@ identical(live_206, as_tibble(page_206)) # check to see if both are identitical
 
 (@) Explain each line in the code above. Remember: You can type `?function()` in your console to access the documentation for any of the functions used above. For example, write `?trimws` and see what happens.
 
-> 
+> This line checks whether data was successfully fetched. line creates a new single row data table named. This line pulls the digital record ID, converts it from text into a number and saves it in the pageptr column.This line pulls the full page text, removes any extra spaces at the beginning and end.
 
 ------------------------------------------------------------------------
 
@@ -211,12 +211,13 @@ by_machine %>% count(is.na(address))
 (@) What share of entries has no `address`? Use `filter(is.na(address))`).
 
 ```{r}
-
+by_machine %>% 
+  filter(is.na(address))
 ```
 
 (@) Pick two of the entries without addresses and try to explain why the parser failed.
 
->
+> When a single directory entry wrapped onto a second or third line
 
 ------------------------------------------------------------------------
 
@@ -295,15 +296,15 @@ residences %>%
 
 (@) Seven people "live" at `same`. Write down what you'd do with those rows in a real project: delete them, look up the business address from each entry, or something else? What would each choice do to a count of shared addresses?
 
->
+> Keeping same as an address miscounts seven unrelated people as living at a single fictitious location. Replacing same with the correct business location increases the accuracy of counts at those specific addresses.
 
 (@) The same surname at the same address suggests a family, but the database only **records** a shared address. Pick one shared address from `shared`. What might the people there be to each other? What could you check (another page, another year of the directory, the census) to find out? What does the `housing` column (`res` vs. `rooms` vs. `bds`) add?
 
->
+> t 733 N. Elm, the four people named Dale are likely parents and children living in the same home. To verify their exact relationships, a researcher could check the 1920 or 1930 federal census records or compare city directory listings across adjacent years.
 
 (@) Freedom on the Move stores names in their own table (`enslaved_person_name`), with a column `is_alias`, because one person can appear under several names. Our `people` table has one name per person, and wives appear only inside parentheses. Sketch (in words) one more table you'd add to our database to fix one of these problems. What would one row be, and what would its columns be?
 
->
+> To fix the problem of hidden wives, I would add a new table called dependents or spouses. One row in this table would represent a single wife or household member mentioned in parentheses.
 
 (@) Our `asterisk` column comes from a racial classification the publisher printed next to some names. A database makes a column like that very easy to count, map, and join. Name one question a historian could responsibly ask with it, and one way it could be misused.
 
