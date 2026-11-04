@@ -1,8 +1,8 @@
 ---
 title: "Exercise 7: Mapping Muncie, 1925"
 subtitle: "Base layers, small multiples, and interactive maps in R"
-author: ""
-date: ""
+author: "Asante Anglin"
+date: "11-04-26"
 format:
   html:
     theme: cosmo
@@ -438,7 +438,7 @@ Over the last five exercises you've seen five kinds of visualizations: charts fr
 
 1.  **Source and row.** What is your main source, and what will one row of your data be (a person, a document, a page, a place, an event)?
 
-> 
+>  The main source would be the ads. I believe one row of data would be the event taking place in each of the ads
 
 2.  **Method.** Which method from E2–E7 fits your question best, and why? (If none fits, say what's missing.)
 
